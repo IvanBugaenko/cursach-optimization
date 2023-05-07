@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import QueenPuzzle from "./Doska";
+
 function NumberInput() {
   const [value, setValue] = useState("");
   const [size, setSize] = useState();
