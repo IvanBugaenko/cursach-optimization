@@ -1,0 +1,31 @@
+.board {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid black;
+  }
+  
+  .row {
+    display: flex;
+  }
+  
+  .square {
+    width: 50px;
+    height: 50px;
+    border: 1px solid black;
+  }
+  
+  .even {
+    background-color: #eee;
+  }
+  
+  .odd {
+    background-color: #ccc;
+  }
+  
+  .queen {
+    background-image: url('https://www.freeiconspng.com/thumbs/queen-icon/queen-icon-28.png');
+    background-size: 80%;
+    background-repeat: no-repeat;
+    background-position: center;
+  }
+  
