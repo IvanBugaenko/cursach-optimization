@@ -1,9 +1,10 @@
-
 import './css/App.css';
-
+import NumberInput from './input';
 function App() {
   return (
-<div></div>
+    <div>
+      <NumberInput/>
+    </div>
   );
 }
 
