@@ -1,4 +1,3 @@
-from algorithm.individual import Individual
 import numpy as np
 
 
@@ -20,11 +19,15 @@ def fitness(individual: np.ndarray) -> int:
     Пусть даны два ферзя X(x1, y1) и Y(x2, y2), где (x, y) - координаты фигуры на шахматной доске 
     (ось Ox - горизонтальная ось, Oy - вертикальная).
 
-    Ферзи угрожают друг другу тогда и только тогда, когда x2 - x1 = |y2 - y1|
+    Ферзи угрожают друг другу тогда и только тогда, когда |x2 - x1| = |y2 - y1|
     """
 
     f = 0
+    N = individual.shape[0]
 
-    for x_1 in range(len(individual)):
-        for x_2 in range(len(individual)):
-             
+    for i in range(N):
+        for j in range(i + 1, N):
+            if abs(i - j) == abs(individual[i] - individual[j]):
+                f += 1
+
+    return f
