@@ -1,4 +1,4 @@
-import './css/App.css';
+import './css/App.scss';
 import NumberInput from './input';
 function App() {
   return (

@@ -1,8 +1,11 @@
 .board {
     display: flex;
     flex-direction: column;
-    border: 1px solid black;
+    margin-top: 2em;
+    align-items: center;
+    justify-content: center;
   }
+  
   
   .row {
     display: flex;
@@ -23,7 +26,7 @@
   }
   
   .queen {
-    background-image: url('https://www.freeiconspng.com/thumbs/queen-icon/queen-icon-28.png');
+    background-image: url('quin.png');
     background-size: 80%;
     background-repeat: no-repeat;
     background-position: center;
