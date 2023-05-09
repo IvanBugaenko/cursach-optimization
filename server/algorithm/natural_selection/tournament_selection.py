@@ -3,7 +3,7 @@ from algorithm.fitness import fitness
 
 
 def tournament_selection(population: np.ndarray, tournament_size: int) -> np.ndarray:
-    return np.vstack(
+    return np.vstack([
         population[
             np.argmin(np.apply_along_axis(
                 fitness,
@@ -12,4 +12,4 @@ def tournament_selection(population: np.ndarray, tournament_size: int) -> np.nda
             ))
         ]
         for _ in range(population.shape[0])
-    )
+    ])

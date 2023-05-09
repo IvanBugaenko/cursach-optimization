@@ -9,4 +9,4 @@ def create_individual(N: int) -> np.ndarray:
 
 
 def create_population(N: int, population_dim: int) -> np.ndarray:
-    return np.vstack(create_individual(N) for _ in range(population_dim))
+    return np.vstack([create_individual(N) for _ in range(population_dim)])
