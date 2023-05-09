@@ -1,7 +1,8 @@
 from algorithm.individual import Individual
+import numpy as np
 
 
-def fitness(individual: Individual) -> int:
+def fitness(individual: np.ndarray) -> int:
     """
     Данная функция возвращает степень приспособленности особи (расположение ферзей на шахматной доске).
     Степень приспособленности заключается в количестве коллизий ферзей по диагоналям 
@@ -15,4 +16,15 @@ def fitness(individual: Individual) -> int:
 
     Решение найдено, если значение fitness(individual) = 0. Это значит, что фигуры не бьют друг друга и по диагонали,
     и по вертикали и горизонтали (по условию построения).
+
+    Пусть даны два ферзя X(x1, y1) и Y(x2, y2), где (x, y) - координаты фигуры на шахматной доске 
+    (ось Ox - горизонтальная ось, Oy - вертикальная).
+
+    Ферзи угрожают друг другу тогда и только тогда, когда x2 - x1 = |y2 - y1|
     """
+
+    f = 0
+
+    for x_1 in range(len(individual)):
+        for x_2 in range(len(individual)):
+             
