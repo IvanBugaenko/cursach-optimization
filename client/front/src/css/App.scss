@@ -51,15 +51,9 @@ body {
   -o-animation-timing-function:      linear;
   animation-timing-function:         linear;
   
-  &::before {
-    content: "Задача о 8 ферзях";
 
-    font-size: 2rem;
-    font-weight: 100;
-    font-style: normal;
-  }
 
-  button{
+  .send{
     font-weight: 500;
     color: white;
     text-decoration: none;
@@ -69,8 +63,8 @@ body {
     transition: 0.2s;
     margin-left: 1em;
   } 
-  button:hover { background: rgb(53, 167, 110); }
-  button:active {
+  .send:hover { background: rgb(53, 167, 110); }
+  .send:active {
     background: rgb(33,147,90);
     box-shadow: 0 3px rgb(33,147,90) inset;
   }
