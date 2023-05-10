@@ -3,43 +3,33 @@ import Slider from "@mui/material/Slider";
 import TextField from "@mui/material/TextField";
 
 function Settings(props) {
+    const {updateAlgParams, alg_params} = props;
     const [valueMu, setValueMu] = useState("");
     const [valueSk, setValueSk] = useState("");
 
-    let dictionary = {
-        N: "8",
-        population_dim: "100",
-        tournament_size: "5",
-        crossing_probability: "0.85",
-        mutation_probability: "0.15",
-        exchange_num: "3",
-        steps: "100",
-    };
-    const handleChangePop = (event, newValue) => {
-        dictionary["population_dim"] = event.target.value;
-        props.onData(dictionary);
+    const handleChangePop = (event) => {
+        updateAlgParams("population_dim", event.target.value);
     };
 
-    const handleChangeStep = (event, newValue) => {
-        dictionary["steps"] = event.target.value;
+    const handleChangeStep = (event) => {
+        updateAlgParams("steps", event.target.value);
     };
 
-    const handleChangeValueMut = (event, newValue) => {
-        dictionary["exchange_num"] = event.target.value;
+    const handleChangeValueMut = (event) => {
+        updateAlgParams("exchange_num", event.target.value);
     };
 
-    const handleChangeSize = (event, newValue) => {
-        dictionary["tournament_size"] = event.target.value;
+    const handleChangeSize = (event) => {
+        updateAlgParams("tournament_size", event.target.value);
     };
 
     const handleChangeSlide = (event, newValue) => {
         setValueMu(newValue);
-        dictionary["mutation_probability"] = newValue;
+        updateAlgParams("mutation_probability", newValue);
     };
     const handleChangeSlide2 = (event, newValue) => {
         setValueSk(newValue);
-        dictionary["crossing_probability"] = newValue;
-        // console.log(dictionary)
+        updateAlgParams("crossing_probability", newValue);
     };
 
     return (
@@ -48,7 +38,7 @@ function Settings(props) {
                 <div>
                     <TextField
                         size="small"
-                        defaultValue={dictionary["population_dim"]}
+                        defaultValue={alg_params["population_dim"]}
                         id="standard-basic"
                         label="Размер популяции"
                         variant="standard"
@@ -56,7 +46,7 @@ function Settings(props) {
                     />
                     <TextField
                         size="small"
-                        defaultValue={dictionary["tournament_size"]}
+                        defaultValue={alg_params["tournament_size"]}
                         id="standard-basic"
                         label="Размер турнира"
                         variant="standard"
@@ -65,7 +55,7 @@ function Settings(props) {
                     <br></br>
                     <TextField
                         size="small"
-                        defaultValue={dictionary["steps"]}
+                        defaultValue={alg_params["steps"]}
                         id="standard-basic"
                         label="Число шагов"
                         variant="standard"
@@ -73,7 +63,7 @@ function Settings(props) {
                     />
                     <TextField
                         size="small"
-                        defaultValue={dictionary["exchange_num"]}
+                        defaultValue={alg_params["exchange_num"]}
                         id="standard-basic"
                         label="Количество мутаций"
                         variant="standard"
