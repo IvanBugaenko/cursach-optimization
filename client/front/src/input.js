@@ -7,7 +7,6 @@ import Settings from "./settings";
 
 function NumberInput() {
     const [value, setValue] = useState("");
-    const [size, setSize] = useState();
     const [displayQueenPuzzle, setDisplayQueenPuzzle] = useState(false);
     const [displaySettings, setDisplaySettings] = useState(false);
 
@@ -20,7 +19,9 @@ function NumberInput() {
         exchange_num: "3",
         steps: "100",
     });
-    const [alg_results, setAlgResults] = useState({});
+    const [alg_results, setAlgResults] = useState({
+        arrangement: [],
+    });
 
     const updateAlgParams = (key, value) => {
         let new_params = { ...alg_params };
@@ -37,7 +38,6 @@ function NumberInput() {
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        setSize(value);
 
         // TODO: вынести в .env
         fetch(`http://localhost:10002/algorithm/`, {
@@ -99,7 +99,9 @@ function NumberInput() {
                     Submit
                 </button>
             </form>
-            {displayQueenPuzzle && <QueenPuzzle size={size} />}
+            {displayQueenPuzzle && (
+                <QueenPuzzle coords={alg_results["arrangement"]} />
+            )}
         </div>
     );
 }

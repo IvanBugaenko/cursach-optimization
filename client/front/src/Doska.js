@@ -1,20 +1,24 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "./css/Doska.css";
 
 function QueenPuzzle(props) {
-    const size = parseInt(props["size"]);
-    // console.log(size)
+    const { coords } = props;
+
     const [board, setBoard] = useState(
-        Array(size)
-            .fill()
-            .map(() => Array(size).fill(false))
+        Array(coords.length).fill().map(() => Array(coords.length).fill(false))
     );
 
-    const handleSquareClick = (row, col) => {
-        const newBoard = [...board];
-        newBoard[row][col] = !newBoard[row][col];
-        setBoard(newBoard);
-    };
+    useEffect(() => {
+        let size = coords.length;
+        const queenSpawn = (coords) => {
+            const newBoard = Array(size).fill().map(() => Array(size).fill(false));
+            coords.forEach((xy) => {
+                newBoard[xy[1]][xy[0]] = true;
+            });
+            setBoard(newBoard);
+        };
+        queenSpawn(coords);
+    }, [coords]);
 
     return (
         <div className="board">
@@ -26,9 +30,6 @@ function QueenPuzzle(props) {
                             className={`square ${
                                 (rowIndex + colIndex) % 2 === 0 ? "even" : "odd"
                             } ${square ? "queen" : ""}`}
-                            onClick={() =>
-                                handleSquareClick(rowIndex, colIndex)
-                            }
                         />
                     ))}
                 </div>
