@@ -4,3 +4,4 @@ python-dotenv
 python-multipart
 numpy
 pydantic-numpy
+pandas

@@ -6,7 +6,7 @@ from algorithm.crossing.ordered_crossing import ordered_crossing_population
 from algorithm.mutation.exchange_mutation import exchange_mutation_population
 
 
-def evolution(N: int, population_dim: int, tournament_size: int, crossing_probability: float, mutation_probability: float, exchange_num: int, steps: int) -> np.ndarray:
+def evolution(N: int, population_dim: int, tournament_size: int, crossing_probability: float, mutation_probability: float, exchange_num: int, steps: int) -> dict:
     population = create_population(N, population_dim)
     cache = []
     step = 0
