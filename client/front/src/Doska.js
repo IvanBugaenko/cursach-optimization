@@ -1,24 +1,36 @@
 import { useEffect, useState } from "react";
+import Slider from "@mui/material/Slider";
 import "./css/Doska.css";
 
 function QueenPuzzle(props) {
-    const { coords } = props;
+    const { cache } = props;
 
-    const [board, setBoard] = useState(
-        Array(coords.length).fill().map(() => Array(coords.length).fill(false))
-    );
+    const [board, setBoard] = useState([]);
+    const [algStep, setAlgStep] = useState(cache.length);
 
     useEffect(() => {
-        let size = coords.length;
-        const queenSpawn = (coords) => {
-            const newBoard = Array(size).fill().map(() => Array(size).fill(false));
-            coords.forEach((xy) => {
-                newBoard[xy[1]][xy[0]] = true;
-            });
-            setBoard(newBoard);
-        };
-        queenSpawn(coords);
-    }, [coords]);
+        updateBoard(cache.length - 1);
+        setAlgStep(cache.length);
+    }, [cache]);
+
+    useEffect(() => {
+        updateBoard(algStep - 1);
+    }, [algStep]);
+
+    const updateBoard = (idx) => {
+        const coords = cache[idx][0];
+        const size = coords.length;
+        const newBoard = Array(size).fill().map(() => Array(size).fill(false));
+        coords.forEach((xy) => {
+            newBoard[xy[1]][xy[0]] = true;
+        });
+        setBoard(newBoard);
+    };
+
+    const handleChangeSlide = (event, newValue) => {
+        setAlgStep(newValue);
+        updateBoard(newValue - 1);
+    };
 
     return (
         <div className="board">
@@ -34,6 +46,18 @@ function QueenPuzzle(props) {
                     ))}
                 </div>
             ))}
+            <Slider
+                value={algStep}
+                onChange={handleChangeSlide}
+                step={1}
+                valueLabelDisplay="auto"
+                min={1}
+                max={cache.length}
+                sx={{
+                    width: 300,
+                    color: "gray",
+                }}
+            />
         </div>
     );
 }

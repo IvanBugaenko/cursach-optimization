@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import QueenPuzzle from "./Doska";
-
 import { IconButton } from "@mui/material";
 import TuneIcon from "@mui/icons-material/Tune";
 import Settings from "./settings";
@@ -19,8 +18,11 @@ function NumberInput() {
         exchange_num: "3",
         steps: "100",
     });
+
     const [alg_results, setAlgResults] = useState({
         arrangement: [],
+        fitness: -1,
+        cache: [[[], -1],],
     });
 
     const updateAlgParams = (key, value) => {
@@ -29,15 +31,25 @@ function NumberInput() {
         setAlgParams(new_params);
     };
 
+    const resetAlgResults = () => {
+        setAlgResults({
+            arrangement: [],
+            fitness: -1,
+            cache: [[[], -1],],
+        });
+    }
+
     const handleChange = (event) => {
         const newValue = event.target.value;
         setValue(newValue);
         updateAlgParams("N", newValue);
         setDisplayQueenPuzzle(false);
+        resetAlgResults();
     };
 
     const handleSubmit = (event) => {
         event.preventDefault();
+        resetAlgResults();
 
         // TODO: вынести в .env
         fetch(`http://localhost:10002/algorithm/`, {
@@ -57,7 +69,8 @@ function NumberInput() {
                     item[0] = decodeCoords(item[0]);
                 });
                 setAlgResults(data);
-                console.log(data);
+                // * data["arrangement"] совпадает с data["cache"].at(-1)[0]
+                // * data["fitness"] совпадает с data["cache"].at(-1)[1]
             })
             .catch((error) => {
                 console.error(error);
@@ -82,7 +95,7 @@ function NumberInput() {
     return (
         <div>
             <h2>
-                Задача о 8 ферзях{" "}
+                Задача о N ферзях{" "}
                 <IconButton onClick={setSettings}>
                     <TuneIcon variant="contained" />{" "}
                 </IconButton>{" "}
@@ -100,7 +113,7 @@ function NumberInput() {
                 </button>
             </form>
             {displayQueenPuzzle && (
-                <QueenPuzzle coords={alg_results["arrangement"]} />
+                <QueenPuzzle  cache={alg_results["cache"]} />
             )}
         </div>
     );
