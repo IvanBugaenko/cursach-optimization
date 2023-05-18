@@ -1,5 +1,5 @@
 import "./css/App.scss";
-import NumberInput from "./input";
+import NumberInput from "./NumberInput";
 function App() {
     return (
         <div>
