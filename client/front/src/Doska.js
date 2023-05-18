@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import Slider from "@mui/material/Slider";
 import "./css/Doska.css";
 
@@ -8,16 +8,7 @@ function QueenPuzzle(props) {
     const [board, setBoard] = useState([]);
     const [algStep, setAlgStep] = useState(cache.length);
 
-    useEffect(() => {
-        updateBoard(cache.length - 1);
-        setAlgStep(cache.length);
-    }, [cache]);
-
-    useEffect(() => {
-        updateBoard(algStep - 1);
-    }, [algStep]);
-
-    const updateBoard = (idx) => {
+    const updateBoard = useCallback((idx) => {
         const coords = cache[idx][0];
         const size = coords.length;
         const newBoard = Array(size).fill().map(() => Array(size).fill(false));
@@ -25,7 +16,12 @@ function QueenPuzzle(props) {
             newBoard[xy[1]][xy[0]] = true;
         });
         setBoard(newBoard);
-    };
+    }, [cache]);
+
+    useEffect(() => {
+        updateBoard(cache.length - 1);
+        setAlgStep(cache.length);
+    }, [cache, updateBoard]);
 
     const handleChangeSlide = (event, newValue) => {
         setAlgStep(newValue);

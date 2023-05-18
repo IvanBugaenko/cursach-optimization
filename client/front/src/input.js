@@ -51,6 +51,8 @@ function NumberInput() {
         event.preventDefault();
         resetAlgResults();
 
+        console.log(alg_params);
+
         // TODO: вынести в .env
         fetch(`http://localhost:10002/algorithm/`, {
             method: "POST",
