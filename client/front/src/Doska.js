@@ -54,6 +54,7 @@ function QueenPuzzle(props) {
                     color: "gray",
                 }}
             />
+            <br />
         </div>
     );
 }

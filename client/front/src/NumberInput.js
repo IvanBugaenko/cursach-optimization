@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import QueenPuzzle from "./Doska";
 import { IconButton } from "@mui/material";
 import TuneIcon from "@mui/icons-material/Tune";
-import Settings from "./settings";
+import Settings from "./Settings";
 
 function NumberInput() {
     const [value, setValue] = useState("");
