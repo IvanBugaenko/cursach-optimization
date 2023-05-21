@@ -11,7 +11,8 @@ def evolution(N: int, population_dim: int, tournament_size: int, crossing_probab
     cache = []
     step = 0
 
-    while (step := step + 1) <= steps:
+    while step < steps:
+        step += 1
         best_fitness = float('inf')
         best_individual = None
 
